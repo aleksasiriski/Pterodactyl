@@ -1,19 +1,19 @@
 #ifndef DATABASE_HPP_INCLUDED
 #define DATABASE_HPP_INCLUDED
 
-class database()
+class Database()
 {
 private:
 	string dbname,dbip,dbuser,dbpassword;
 public:
-	database()
+	Database()
 	{
 		dbname="";
 		dbip="";
 		dbuser="";
 		dbpassword="";
 	}
-	database(string name,string ip,string user,string password)
+	Database(string name,string ip,string user,string password)
 	{
 		dbname=name;
 		dbip=ip;
@@ -22,8 +22,7 @@ public:
 	}
 	string getDB()const
 	{
-		string DB="'"+dbname+"'@'"+
-		return DB;
+		return "'"+dbname+"'@'"+dbip+"' using "+dbuser;
 	}
 	void setDB(string name,string ip,string user,string password)
 	{
