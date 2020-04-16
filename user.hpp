@@ -1,6 +1,6 @@
-#ifndef _HPP_INCLUDED
-#define _HPP_INCLUDED
+#ifndef USER_HPP_INCLUDED
+#define USER_HPP_INCLUDED
 
 
 
-#endif // _HPP_INCLUDED
+#endif // USER_HPP_INCLUDED
