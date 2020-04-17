@@ -12,12 +12,22 @@ public:
 		CPU=1;
 		RAM=2;
 		ROM=5;
+		DB.setDB("","","","");
 	}
-	Server(int C,int RA,int RO)
+	Server(int C,int RA,int RO,string dbname,string dbip,string dbuser,string dbpassword)
 	{
 		CPU=C;
 		RAM=RA;
 		ROM=RO;
+		DB.setDB(dbname,dbip,dbuser,dbpassword);
+	}
+	string getDB()const
+	{
+		return DB.getDB();
+	}
+	void setDB(string dbname,string dbip,string dbuser,string dbpassword)
+	{
+		DB.setDB(dbname,dbip,dbuser,dbpassword);
 	}
 	int getCPU()const
 	{
