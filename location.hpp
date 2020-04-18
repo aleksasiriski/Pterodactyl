@@ -8,27 +8,14 @@ private:
 	string CC;
 	Node N;
 public:
-	Location()
+	Location():N()
 	{
 		CC="RS";
-		N.setACPU(2);
-		N.setARAM(16);
-		N.setAROM(100);
-		N.setCPU(1);
-		N.setRAM(2);
-		N.setROM(5);
-		N.setDB("","","","");
 	}
 	Location(string CCC,int AC,int ARA,int ARO,int C,int RA,int RO,string dbname,string dbip,string dbuser,string dbpassword)
+	:N(AC,ARA,ARO,C,RA,RO,dbname,dbip,dbuser,dbpassword)
 	{
 		CC=CCC;
-		N.setACPU(AC);
-		N.setARAM(ARA);
-		N.setAROM(ARO);
-		N.setCPU(C);
-		N.setRAM(RA);
-		N.setROM(RO);
-		N.setDB(dbname,dbip,dbuser,dbpassword);
 	}
 	void setCC(string CCC)
 	{

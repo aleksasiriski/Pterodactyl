@@ -8,25 +8,18 @@ private:
 	int ACPU,ARAM,AROM;
 	server S;
 public:
-	Node()
+	Node():S()
 	{
 		ACPU=2;
 		ARAM=16;
 		AROM=100;
-		S.setCPU(1);
-		S.setRAM(2);
-		S.setROM(5);
-		S.setDB("","","","");
 	}
 	Node(int AC,int ARA,int ARO,int C,int RA,int RO,string dbname,string dbip,string dbuser,string dbpassword)
+	:S(C,RA,RO,dbname,dbip,dbuser,dbpassword)
 	{
 		ACPU=AC;
 		ARAM=ARA;
 		AROM=ARO;
-		S.setCPU(C);
-		S.setRAM(RA);
-		S.setROM(RO);
-		S.setDB(dbname,dbip,dbuser,dbpassword);
 	}
 	string getDB()const
 	{
