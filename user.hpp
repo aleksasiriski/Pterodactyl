@@ -22,9 +22,10 @@ public:
 	{
 		return Email;
 	}
-	string resetPassword()const
+	string resetPassword()
 	{
-		return "promenime123";
+		Password="promenime123";
+		return Password;
 	}
 	string setFName(string FName1)
 	{

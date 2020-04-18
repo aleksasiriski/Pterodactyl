@@ -34,7 +34,7 @@ public:
 	}
 	int getCPU()const
 	{
-		return N.getCPU;
+		return N.getCPU();
 	}
 	void setCPU(int C)
 	{
@@ -42,7 +42,7 @@ public:
 	}
 	int getRAM()const
 	{
-		return N.getRAM;
+		return N.getRAM();
 	}
 	int setRAM(int RA)
 	{
@@ -50,7 +50,7 @@ public:
 	}
 	int getROM()const
 	{
-		return N.getROM;
+		return N.getROM();
 	}
 	int setROM(int RO)
 	{
@@ -74,7 +74,7 @@ public:
 	}
 	int getAROM()const
 	{
-		return N.setAROM();
+		return N.getAROM();s
 	}
 	int setAROM(int ARO)
 	{
