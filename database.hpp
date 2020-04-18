@@ -1,7 +1,7 @@
 #ifndef DATABASE_HPP_INCLUDED
 #define DATABASE_HPP_INCLUDED
 
-class Database()
+class Database
 {
 private:
 	string dbname,dbip,dbuser,dbpassword;

@@ -2,7 +2,7 @@
 #define LOCATION_HPP_INCLUDED
 #include "node.hpp"
 
-class Location()
+class Location
 {
 private:
 	string CC;

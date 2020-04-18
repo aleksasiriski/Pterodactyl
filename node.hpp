@@ -2,7 +2,7 @@
 #define NODE_HPP_INCLUDED
 #include "server.hpp"
 
-class Node()
+class Node
 {
 private:
 	int ACPU,ARAM,AROM;
