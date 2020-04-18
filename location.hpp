@@ -75,7 +75,7 @@ public:
 	}
 	int getAROM()const
 	{
-		return N.getAROM();s
+		return N.getAROM();
 	}
 	int setAROM(int ARO)
 	{
