@@ -11,14 +11,28 @@ public:
 	Location()
 	{
 		CC="RS";
+		N.setACPU(2);
+		N.setARAM(16);
+		N.setAROM(100);
+		N.setCPU(1);
+		N.setRAM(2);
+		N.setROM(5);
+		N.setDB("","","","");
 	}
-	Location(string C)
+	Location(string CCC,int AC,int ARA,int ARO,int C,int RA,int RO,string dbname,string dbip,string dbuser,string dbpassword)
 	{
-		CC=C;
+		CC=CCC;
+		N.setACPU(AC);
+		N.setARAM(ARA);
+		N.setAROM(ARO);
+		N.setCPU(C);
+		N.setRAM(RA);
+		N.setROM(RO);
+		N.setDB(dbname,dbip,dbuser,dbpassword);
 	}
-	void setCC(string C)
+	void setCC(string CCC)
 	{
-		CC=C;
+		CC=CCC;
 	}
 	void getCC()const
 	{
