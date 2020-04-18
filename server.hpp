@@ -1,7 +1,7 @@
 #ifndef SERVER_HPP_INCLUDED
 #define SERVER_HPP_INCLUDED
 #include "database.hpp"
-class Server()
+class Server
 {
 private:
 	int CPU,RAM,ROM;
