@@ -7,19 +7,17 @@ private:
 	int CPU,RAM,ROM;
 	database DB;
 public:
-	Server()
+	Server():DB()
 	{
 		CPU=1;
 		RAM=2;
 		ROM=5;
-		DB.setDB("","","","");
 	}
-	Server(int C,int RA,int RO,string dbname,string dbip,string dbuser,string dbpassword)
+	Server(int C,int RA,int RO,string dbname,string dbip,string dbuser,string dbpassword):DB(dbname,dbip,dbuser,dbpassword)
 	{
 		CPU=C;
 		RAM=RA;
 		ROM=RO;
-		DB.setDB(dbname,dbip,dbuser,dbpassword);
 	}
 	string getDB()const
 	{
