@@ -75,8 +75,8 @@ public:
 };
 class Admin:public User
 {
-private:
-	unsigned short admin;
+protected:
+	unsigned short adminID;
 public:
 	Admin():User()
 	{
@@ -93,6 +93,28 @@ public:
     Admin(const User& u, unsigned short ID):User(u)
     {
     	adminID=ID;
+    }
+}
+class SUAdmin:public Admin
+{
+private:
+	bool SU;
+public:
+	SUAdmin():Admin()
+	{
+		SU=true;
+	}
+    SUAdmin(string FN,string LN,string U,string E,string P,unsigned short ID):Admin(FN,LN,U,E,P,ID)
+    {
+    	SU=true;
+    }
+    SUAdmin(const SUAdmin& a):Admin(a)
+    {
+    	//adminID=a.adminID;
+    }
+    SUAdmin(const Admin& u/*, unsigned short ID*/):Admin(u)
+    {
+    	//adminID=ID;
     }
 }
 
