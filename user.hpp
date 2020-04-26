@@ -86,8 +86,14 @@ public:
     {
     	adminID=ID;
     }
-    //Admin(const Admin& a):User(a), brojIndeksa(s.brojIndeksa) {}
-    //Admin(const User& u, int brojInd):User(u), brojIndeksa(brojInd) {}
+    Admin(const Admin& a):User(a)
+    {
+    	adminID=a.adminID;
+    }
+    Admin(const User& u, unsigned short ID):User(u)
+    {
+    	adminID=ID;
+    }
 }
 
 #endif // USER_HPP_INCLUDED
