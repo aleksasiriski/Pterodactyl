@@ -75,23 +75,19 @@ public:
 };
 class Admin:public User
 {
-//nesto
-}
-class Student: public Osoba
-{
 private:
-    int brojIndeksa;
+	unsigned short admin;
 public:
-    Student():Osoba("lola", "lolic", 6), brojIndeksa(1) {}
-    Student(string i, string p, int g, int ind):Osoba(i, p, g), brojIndeksa(ind) {}
-    Student(const Student& s):Osoba(s), brojIndeksa(s.brojIndeksa) {}
-    Student(const Osoba& o, int brojInd):Osoba(o), brojIndeksa(brojInd) {}
-    void predstaviSe()
+	Admin():User()
+	{
+		adminID=0;
+	}
+    Admin(string FN,string LN,string U,string E,string P,unsigned short ID):User(FN,LN,U,E,P)
     {
-        Osoba::predstaviSe();
-        cout<<"I broj mog indeksa je: "<<brojIndeksa<<endl;
+    	adminID=ID;
     }
-
-};
+    //Admin(const Admin& a):User(a), brojIndeksa(s.brojIndeksa) {}
+    //Admin(const User& u, int brojInd):User(u), brojIndeksa(brojInd) {}
+}
 
 #endif // USER_HPP_INCLUDED
