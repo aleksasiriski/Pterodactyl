@@ -6,6 +6,31 @@ class User
 protected:
 	string FName,LName,Username,Email,Password;
 public:
+	User()
+	{
+		FName="";
+		LName="";
+		Username="";
+		Email="";
+		Password="";
+	}
+	User(string FN,string LN,string U,string E,string P)
+	{
+		FName=FN;
+		LName=LN;
+		Username=U;
+		Email=E;
+		Password=P;
+	}
+	User(const User& u)
+    {
+        FName=u.FName;
+		LName=u.LName;
+		Username=u.Username;
+		Email=u.Email;
+		Password=u.Password;
+
+    }
 	string getFName()const
 	{
 		return FName;
@@ -52,5 +77,21 @@ class Admin:public User
 {
 //nesto
 }
+class Student: public Osoba
+{
+private:
+    int brojIndeksa;
+public:
+    Student():Osoba("lola", "lolic", 6), brojIndeksa(1) {}
+    Student(string i, string p, int g, int ind):Osoba(i, p, g), brojIndeksa(ind) {}
+    Student(const Student& s):Osoba(s), brojIndeksa(s.brojIndeksa) {}
+    Student(const Osoba& o, int brojInd):Osoba(o), brojIndeksa(brojInd) {}
+    void predstaviSe()
+    {
+        Osoba::predstaviSe();
+        cout<<"I broj mog indeksa je: "<<brojIndeksa<<endl;
+    }
+
+};
 
 #endif // USER_HPP_INCLUDED
