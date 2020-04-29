@@ -1,6 +1,5 @@
 #ifndef USER_HPP_INCLUDED
 #define USER_HPP_INCLUDED
-int Admin::adminID=0;
 class User
 {
 protected:
