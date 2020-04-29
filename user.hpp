@@ -40,8 +40,38 @@ public:
     	cin >> Username;
     	cout << "Email: ";
     	cin >> Email;
-    	cout << "Password: ";
-    	cin >> Password;
+    	string P;
+    	while(1)
+    	{
+    		cout << "Password(8-16 karaktera sa bar 1 malim, velikim slovom i brojem): ";
+    		cin >> P;
+    		int n=P.size();
+    		bool v=false,m=false,b=false;
+    		for(int i=0;i<n;i++)
+   			{
+   				if(v&&m&&b)
+   					break;
+    			if(!v)
+    			{
+    				if(P[i]>='A' && P[i]<='Z')
+    					v=true;
+    			}
+    			if(!m)
+    			{
+    				if(P[i]>='a' && P[i]<='z')
+    					m=true;
+    			}
+    			if(!b)
+    			{
+    				if(P[i]>='0' && P[i]<='9')
+    					b=true;
+    			}
+    		}
+    		if(v&&m&&b)
+    			break;
+    		cout << endl << "Greska! Pokusajte ponovo." << endl;
+    	}
+    	setPassword(P);
     	cout << endl << "Welcome " << FName << " " << LName << " to pterodactyl panel!" << endl;
     }
 
@@ -64,7 +94,7 @@ public:
 	}
 	string resetPassword() //promena sifre, za slucaj da je zaboravljena
 	{
-		Password="promenime123";
+		Password="PromeniMe123";
 		return Password;
 	}
 	string setFName(string FName1)
