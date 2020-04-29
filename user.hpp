@@ -1,7 +1,6 @@
 #ifndef USER_HPP_INCLUDED
 #define USER_HPP_INCLUDED
-
-unsigned int Identification=0;
+int Admin::adminID=0;
 class User
 {
 protected:
@@ -93,12 +92,9 @@ public:
 class Admin:public User
 {
 protected:
-	unsigned short adminID;
+	static unsigned short adminID;
 public:
-	Admin():User()
-	{
-		adminID=0;
-	}
+	Admin():User() {}
     Admin(string FN,string LN,string U,string E,string P,unsigned short ID):User(FN,LN,U,E,P)
     {
     	adminID=ID;
@@ -113,7 +109,7 @@ public:
     }
     void setupAdmin()
     {
-    	adminID=Identification++;
+    	adminID++;
     	User::setupUser();
     }
 };

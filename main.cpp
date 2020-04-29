@@ -5,6 +5,7 @@ using namespace std;
 #include "user.hpp"
 int main()
 {
+	int Admin::adminID=0;
 	Location First; // pravi jednu lokaciju sa jednim node i jednim serverom i jednim database
 
 	User Marko; // obican user
