@@ -25,5 +25,5 @@ int main()
 
 	/*predlog funkcionalnosti: dodati novu lokaciju node i 2 servera dodeljena 2 normalna usera*/
 
-	return 0;
+	return 0; //zatvoriti program sa svim izmenama sacuvanim u fajlu
 }
