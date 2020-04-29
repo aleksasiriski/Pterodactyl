@@ -3,10 +3,9 @@ using namespace std;
 #include "location.hpp"
 #include "nestandpack.hpp"
 #include "user.hpp"
+int Admin::adminID=0; //brojac ID admina
 int main()
 {
-	int Admin::adminID=0; //brojac ID admina
-
 	Location First; // pravi jednu lokaciju sa jednim node i jednim serverom i jednim database
 
 	User Marko; // obican user
