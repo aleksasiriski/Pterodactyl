@@ -1,6 +1,7 @@
 #ifndef USER_HPP_INCLUDED
 #define USER_HPP_INCLUDED
 
+unsigned int Identification=0;
 class User
 {
 protected:
@@ -31,6 +32,22 @@ public:
 		Password=u.Password;
 
     }
+    void setupUser() //unos korisnika
+    {
+    	cout << "First name: ";
+    	cin >> FName;
+    	cout << "Last name: ";
+    	cin >> LName;
+    	cout << "Username: ";
+    	cin >> Username;
+    	cout << "Email: ";
+    	cin >> Email;
+    	cout << "Password: ";
+    	cin >> Password;
+    	cout << endl << "Welcome " << FName << " " << LName << " to pterodactyl panel!" << endl;
+    }
+
+
 	string getFName()const
 	{
 		return FName;
@@ -47,7 +64,7 @@ public:
 	{
 		return Email;
 	}
-	string resetPassword()
+	string resetPassword() //promena sifre, za slucaj da je zaboravljena
 	{
 		Password="promenime123";
 		return Password;
@@ -94,7 +111,12 @@ public:
     {
     	adminID=ID;
     }
-}
+    void setupAdmin()
+    {
+    	adminID=Identification++;
+    	User::setupUser();
+    }
+};
 class SUAdmin:public Admin
 {
 private:
@@ -116,6 +138,11 @@ public:
     {
     	//adminID=ID;
     }
-}
+    void setupSUAdmin()
+    {
+    	SU=true;
+    	Admin::setupAdmin();
+    }
+};
 
 #endif // USER_HPP_INCLUDED
