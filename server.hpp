@@ -13,8 +13,7 @@ public:
 		RAM=2;
 		ROM=5;
 	}
-	Server(int C,int RA,int RO,string dbname,string dbip,string dbuser,string dbpassword)
-	:DB(dbname,dbip,dbuser,dbpassword)
+	Server(int C,int RA,int RO,string dbname,string dbip,string dbuser,string dbpassword):DB(dbname,dbip,dbuser,dbpassword)
 	{
 		CPU=C;
 		RAM=RA;
