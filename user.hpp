@@ -94,8 +94,19 @@ public:
 	}
 	string resetPassword() //promena sifre, za slucaj da je zaboravljena
 	{
-		Password="PromeniMe123";
-		return Password;
+        size_t length=8;
+        auto randchar=[]()->char
+        {
+            const char charset[]=
+            "0123456789"
+            "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+            "abcdefghijklmnopqrstuvwxyz";
+            const size_t max_index=(sizeof(charset)-1);
+            return charset[rand()%max_index];
+        };
+        string str(length,0);
+        generate_n(str.begin(),length,randchar );
+		return str;
 	}
 	string setFName(string FName1)
 	{
