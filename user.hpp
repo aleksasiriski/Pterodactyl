@@ -1,5 +1,7 @@
 #ifndef USER_HPP_INCLUDED
 #define USER_HPP_INCLUDED
+#include <algorithm>
+#include <cstdlib>
 class User
 {
 protected:
@@ -92,21 +94,35 @@ public:
 	{
 		return Email;
 	}
-	string resetPassword() //promena sifre, za slucaj da je zaboravljena
-	{
-        size_t length=8;
+    string generateChars(size_t length,const char charset[])
+    {
+        srand(time(NULL));
         auto randchar=[]()->char
         {
-            const char charset[]=
-            "0123456789"
-            "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-            "abcdefghijklmnopqrstuvwxyz";
             const size_t max_index=(sizeof(charset)-1);
             return charset[rand()%max_index];
         };
         string str(length,0);
-        generate_n(str.begin(),length,randchar );
-		return str;
+        generate_n(str.begin(),length,randchar);
+        return str;
+    }
+	string resetPassword() //promena sifre, za slucaj da je zaboravljena
+	{
+        string Password="";
+        Password+=generateChars(3,"0123456789");
+        Password+=generateChars(3,"ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+        Password+=generateChars(3,"abcdefghijklmnopqrstuvwxyz");
+        srand(time(NULL));
+        int n=Password.size();
+        for(int i=0;i<10;i++)
+        {
+            int indexa=rand()%n;
+            int indexb=rand()%n;
+            Password[indexa]^=Password[indexb];
+            Password[indexb]^=Password[indexa];
+            Password[indexa]^=Password[indexb];
+        }
+        return Password;
 	}
 	string setFName(string FName1)
 	{
