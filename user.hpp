@@ -45,7 +45,7 @@ public:
     	string P;
     	while(1)
     	{
-    		cout << "Password(8-16 karaktera sa bar 1 malim, velikim slovom i brojem): ";
+    		cout << "Password(8-16 chars with atleast one big, small letter and number): ";
     		cin >> P;
     		int n=P.size();
     		bool v=false,m=false,b=false;
@@ -71,12 +71,11 @@ public:
     		}
     		if(v&&m&&b)
     			break;
-    		cout << endl << "Greska! Pokusajte ponovo." << endl;
+    		cout << endl << "Weak password! Try again." << endl;
     	}
     	setPassword(P);
-    	cout << endl << "Welcome " << FName << " " << LName << " to pterodactyl panel!" << endl;
+    	cout << endl << "Welcome " << FName << " " << LName << " to Pterodactyl panel!" << endl;
     }
-
 
 	string getFName()const
 	{
@@ -96,14 +95,14 @@ public:
 	}
     string generateChars(size_t length,const char charset[])
     {
-        srand(time(NULL));
-        auto randchar=[]()->char
+        /*auto randchar=[]()->char
         {
             const size_t max_index=(sizeof(charset)-1);
             return charset[rand()%max_index];
         };
         string str(length,0);
-        generate_n(str.begin(),length,randchar);
+        generate_n(str.begin(),length,randchar);*/
+        string str="cao";
         return str;
     }
 	string resetPassword() //promena sifre, za slucaj da je zaboravljena
@@ -112,7 +111,6 @@ public:
         Password+=generateChars(3,"0123456789");
         Password+=generateChars(3,"ABCDEFGHIJKLMNOPQRSTUVWXYZ");
         Password+=generateChars(3,"abcdefghijklmnopqrstuvwxyz");
-        srand(time(NULL));
         int n=Password.size();
         for(int i=0;i<10;i++)
         {
@@ -124,23 +122,23 @@ public:
         }
         return Password;
 	}
-	string setFName(string FName1)
+	void setFName(string FName1)
 	{
 		FName=FName1;
 	}
-	string setLName(string LName1)
+	void setLName(string LName1)
 	{
 		LName=LName1;
 	}
-	string setUsername(string Username1)
+	void setUsername(string Username1)
 	{
 		Username=Username1;
 	}
-	string setEmail(string Email1)
+	void setEmail(string Email1)
 	{
 		Email=Email1;
 	}
-	string setPassword(string Password1)
+	void setPassword(string Password1)
 	{
 		Password=Password1;
 	}
@@ -167,33 +165,6 @@ public:
     {
     	adminID++;
     	User::setupUser();
-    }
-};
-class SUAdmin:public Admin
-{
-private:
-	bool SU;
-public:
-	SUAdmin():Admin()
-	{
-		SU=true;
-	}
-    SUAdmin(string FN,string LN,string U,string E,string P,unsigned short ID):Admin(FN,LN,U,E,P,ID)
-    {
-    	SU=true;
-    }
-    SUAdmin(const SUAdmin& a):Admin(a)
-    {
-    	//adminID=a.adminID;
-    }
-    SUAdmin(const Admin& u/*, unsigned short ID*/):Admin(u)
-    {
-    	//adminID=ID;
-    }
-    void setupSUAdmin()
-    {
-    	SU=true;
-    	Admin::setupAdmin();
     }
 };
 

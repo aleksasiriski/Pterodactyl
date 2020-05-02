@@ -1,7 +1,6 @@
 #ifndef LOCATION_HPP_INCLUDED
 #define LOCATION_HPP_INCLUDED
 #include "node.hpp"
-
 class Location
 {
 private:
@@ -21,7 +20,7 @@ public:
 	{
 		CC=CCC;
 	}
-	void getCC()const
+	string getCC()const
 	{
 		return CC;
 	}
@@ -45,7 +44,7 @@ public:
 	{
 		return N.getRAM();
 	}
-	int setRAM(int RA)
+	void setRAM(int RA)
 	{
 		N.setRAM(RA);
 	}
@@ -53,7 +52,7 @@ public:
 	{
 		return N.getROM();
 	}
-	int setROM(int RO)
+	void setROM(int RO)
 	{
 		N.setROM(RO);
 	}
@@ -69,7 +68,7 @@ public:
 	{
 		return N.getARAM();
 	}
-	int setARAM(int ARA)
+	void setARAM(int ARA)
 	{
 		N.setARAM(ARA);
 	}
@@ -77,7 +76,7 @@ public:
 	{
 		return N.getAROM();
 	}
-	int setAROM(int ARO)
+	void setAROM(int ARO)
 	{
 		N.setAROM(ARO);
 	}

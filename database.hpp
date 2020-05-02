@@ -1,6 +1,5 @@
 #ifndef DATABASE_HPP_INCLUDED
 #define DATABASE_HPP_INCLUDED
-
 class Database
 {
 private:

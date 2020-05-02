@@ -5,7 +5,7 @@ class Server
 {
 private:
 	int CPU,RAM,ROM;
-	database DB;
+	Database DB;
 public:
 	Server():DB()
 	{
@@ -39,7 +39,7 @@ public:
 	{
 		return RAM;
 	}
-	int setRAM(int RA)
+	void setRAM(int RA)
 	{
 		RAM=RA;
 	}
@@ -47,7 +47,7 @@ public:
 	{
 		return ROM;
 	}
-	int setROM(int RO)
+	void setROM(int RO)
 	{
 		ROM=RO;
 	}
