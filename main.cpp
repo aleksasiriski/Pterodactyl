@@ -14,6 +14,7 @@ int main()
 	User Marko; // obican user
 	Marko.setupUser(); // inicijalizacija obicnog usera
 	cout << Marko.resetPassword() << endl;
+	Marko.changePassword();
 
 	/*predlog funkcionalnosti: napraviti lokaciju i sve pod njom kao gore, sa dodeljenim cpu, ram i rom
 	i dodeliti taj jedan server obicnom useru*/

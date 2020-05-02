@@ -42,7 +42,7 @@ public:
     	cin >> Username;
     	cout << "Email: ";
     	cin >> Email;
-    	setPassword();
+    	changePassword();
     	cout << endl << "Welcome " << FName << " " << LName << " to Pterodactyl panel!" << endl;
     }
 
@@ -62,7 +62,7 @@ public:
 	{
 		return Email;
 	}
-    /*string getPasswordDEV() //SAMO ZA TESTIRANJE
+    /*string getPassword() //SAMO ZA TESTIRANJE
     {
         return Password;
     }*/
@@ -112,7 +112,11 @@ public:
 	{
 		Email=Email1;
 	}
-	void setPassword()
+    /*void setPassword(string P) //SAMO ZA TESTIRANJE
+    {
+        Password=P;
+    }*/
+	void changePassword()
 	{
 		string P;
         while(1)
