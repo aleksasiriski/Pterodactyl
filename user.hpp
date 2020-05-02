@@ -42,39 +42,7 @@ public:
     	cin >> Username;
     	cout << "Email: ";
     	cin >> Email;
-    	string P;
-    	while(1)
-    	{
-    		cout << "Password(8-16 chars with atleast one big, small letter and number): ";
-    		cin >> P;
-    		int n=P.size();
-    		bool v=false,m=false,b=false;
-    		for(int i=0;i<n;i++)
-   			{
-   				if(v&&m&&b)
-   					break;
-    			if(!v)
-    			{
-    				if(P[i]>='A' && P[i]<='Z')
-    					v=true;
-    			}
-    			if(!m)
-    			{
-    				if(P[i]>='a' && P[i]<='z')
-    					m=true;
-    			}
-    			if(!b)
-    			{
-    				if(P[i]>='0' && P[i]<='9')
-    					b=true;
-    			}
-    		}
-            fflush(stdin); //brise sve uneto posle praznog karaktera
-    		if(v&&m&&b)
-    			break;
-    		cout << endl << "Weak password! Try again." << endl;
-    	}
-    	setPassword(P);
+    	setPassword();
     	cout << endl << "Welcome " << FName << " " << LName << " to Pterodactyl panel!" << endl;
     }
 
@@ -94,34 +62,37 @@ public:
 	{
 		return Email;
 	}
-    string generateChar(int iterations,string charset)const
+    /*string getPasswordDEV() //SAMO ZA TESTIRANJE
     {
-        int n=charset.size();
-        string str;
-        unsigned short counter=0;
+        return Password;
+    }*/
+    string generateChars(int iterations,string charset)const
+    {
+        int n=charset.size(),counter=0;
+        string str="";
         while(counter!=iterations)
         {
             int tmp=rand()%n;
-            str[counter++]=charset[tmp];
+            str+=charset[tmp];
+            counter++;
         }
-        str[counter]='\0';
         return str;
     }
 	string resetPassword() //promena sifre, za slucaj da je zaboravljena
 	{
-        string Password="";
-        int n=3;
-        Password+=generateChar(n,"0123456789");
-        Password+=generateChar(n,"ABCDEFGHIJKLMNOPQRSTUVWXYZ");
-        Password+=generateChar(n,"abcdefghijklmnopqrstuvwxyz");
+        int n=3; //kvadrirano daje duzinu sifre
+        Password="";
+        Password+=generateChars(n,"0123456789");
+        Password+=generateChars(n,"ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+        Password+=generateChars(n,"abcdefghijklmnopqrstuvwxyz");
         n=Password.size();
         for(int i=0;i<10;i++)
         {
             int indexa=rand()%n;
             int indexb=rand()%n;
-            Password[indexa]^=Password[indexb];
-            Password[indexb]^=Password[indexa];
-            Password[indexa]^=Password[indexb];
+            char tmp=Password[indexa];
+            Password[indexa]=Password[indexb];
+            Password[indexb]=tmp;
         }
         return Password;
 	}
@@ -141,9 +112,41 @@ public:
 	{
 		Email=Email1;
 	}
-	void setPassword(string Password1)
+	void setPassword()
 	{
-		Password=Password1;
+		string P;
+        while(1)
+        {
+            cout << "Password(8-16 chars with atleast one big, small letter and number): ";
+            cin >> P;
+            int n=P.size();
+            bool v=false,m=false,b=false;
+            for(int i=0;i<n;i++)
+            {
+                if(v&&m&&b)
+                    break;
+                if(!v)
+                {
+                    if(P[i]>='A' && P[i]<='Z')
+                        v=true;
+                }
+                if(!m)
+                {
+                    if(P[i]>='a' && P[i]<='z')
+                        m=true;
+                }
+                if(!b)
+                {
+                    if(P[i]>='0' && P[i]<='9')
+                        b=true;
+                }
+            }
+            fflush(stdin); //brise sve uneto posle praznog karaktera
+            if(v&&m&&b)
+                break;
+            cout << endl << "Weak password! Try again." << endl;
+        }
+        Password=P;
 	}
 };
 class Admin:public User

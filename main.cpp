@@ -13,12 +13,13 @@ int main()
 
 	User Marko; // obican user
 	Marko.setupUser(); // inicijalizacija obicnog usera
+	cout << Marko.resetPassword() << endl;
 
 	/*predlog funkcionalnosti: napraviti lokaciju i sve pod njom kao gore, sa dodeljenim cpu, ram i rom
 	i dodeliti taj jedan server obicnom useru*/
 
-	Admin Aleksa; // admin
-	Aleksa.setupAdmin(); // inicijalizacija super admina
+	//Admin Aleksa; // admin
+	//Aleksa.setupAdmin(); // inicijalizacija super admina
 
 	/*predlog funkcionalnosti: napraviti jos jedan server na istom node i istoj lokaciji koji je
 	dodeljen adminu, ali da admin moze upravljati i serverom obicnog usera*/
