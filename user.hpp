@@ -69,6 +69,7 @@ public:
     					b=true;
     			}
     		}
+            fflush(stdin); //brise sve uneto posle praznog karaktera
     		if(v&&m&&b)
     			break;
     		cout << endl << "Weak password! Try again." << endl;
@@ -93,25 +94,27 @@ public:
 	{
 		return Email;
 	}
-    string generateChars(size_t length,const char charset[])
+    string generateChar(int iterations,string charset)const
     {
-        /*auto randchar=[]()->char
+        int n=charset.size();
+        string str;
+        unsigned short counter=0;
+        while(counter!=iterations)
         {
-            const size_t max_index=(sizeof(charset)-1);
-            return charset[rand()%max_index];
-        };
-        string str(length,0);
-        generate_n(str.begin(),length,randchar);*/
-        string str="cao";
+            int tmp=rand()%n;
+            str[counter++]=charset[tmp];
+        }
+        str[counter]='\0';
         return str;
     }
 	string resetPassword() //promena sifre, za slucaj da je zaboravljena
 	{
         string Password="";
-        Password+=generateChars(3,"0123456789");
-        Password+=generateChars(3,"ABCDEFGHIJKLMNOPQRSTUVWXYZ");
-        Password+=generateChars(3,"abcdefghijklmnopqrstuvwxyz");
-        int n=Password.size();
+        int n=3;
+        Password+=generateChar(n,"0123456789");
+        Password+=generateChar(n,"ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+        Password+=generateChar(n,"abcdefghijklmnopqrstuvwxyz");
+        n=Password.size();
         for(int i=0;i<10;i++)
         {
             int indexa=rand()%n;
