@@ -1,12 +1,11 @@
 #ifndef NODE_HPP_INCLUDED
 #define NODE_HPP_INCLUDED
 #include "server.hpp"
-
 class Node
 {
 private:
 	int ACPU,ARAM,AROM;
-	server S;
+	Server S;
 public:
 	Node():S()
 	{
@@ -41,7 +40,7 @@ public:
 	{
 		return S.getRAM();
 	}
-	int setRAM(int RA)
+	void setRAM(int RA)
 	{
 		S.setRAM(RA);
 	}
@@ -49,7 +48,7 @@ public:
 	{
 		return S.getROM();
 	}
-	int setROM(int RO)
+	void setROM(int RO)
 	{
 		S.setROM(RO);
 	}
@@ -65,7 +64,7 @@ public:
 	{
 		return ARAM;
 	}
-	int setARAM(int ARA)
+	void setARAM(int ARA)
 	{
 		ARAM=ARA;
 	}
@@ -73,7 +72,7 @@ public:
 	{
 		return AROM;
 	}
-	int setAROM(int ARO)
+	void setAROM(int ARO)
 	{
 		AROM=ARO;
 	}

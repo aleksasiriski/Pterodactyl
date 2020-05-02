@@ -1,0 +1,26 @@
+# depslib dependency file v1.0
+1588442581 source:d:\stvari\github\pterodactyl\main.cpp
+	<iostream>
+	<cstdlib>
+	<ctime>
+	"location.hpp"
+	"eggnestpack.hpp"
+	"user.hpp"
+
+1588442651 d:\stvari\github\pterodactyl\location.hpp
+	"node.hpp"
+
+1588442628 d:\stvari\github\pterodactyl\node.hpp
+	"server.hpp"
+
+1588442601 d:\stvari\github\pterodactyl\server.hpp
+	"database.hpp"
+
+1588441181 d:\stvari\github\pterodactyl\database.hpp
+
+1588442466 d:\stvari\github\pterodactyl\eggnestpack.hpp
+
+1588442665 d:\stvari\github\pterodactyl\user.hpp
+	<algorithm>
+	<cstdlib>
+
