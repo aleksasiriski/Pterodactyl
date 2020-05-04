@@ -191,8 +191,8 @@ public:
     }
 };
 
-vector<User*> users;
-vector<Admin*> admins;
+vector<User> users;
+vector<Admin> admins;
 void loadUsers(string filename)
 {
     ifstream file(filename);
@@ -203,7 +203,7 @@ void loadUsers(string filename)
         {
             file>>FName>>LName>>Username>>Email>>Password;
             User u(FName,LName,Username,Email,Password);
-            users.push_back(&u);
+            users.push_back(u);
         }
         file.close();
     }
@@ -213,7 +213,7 @@ void loadUsers(string filename)
 void listUsers()
 {
     for(auto i=users.begin();i!=users.end();i++)
-        cout<<(*i)->ispis()<<endl;
+        cout<<i->getFName()<<endl;
 }
 void loadAdmins(string filename)
 {
@@ -226,7 +226,7 @@ void loadAdmins(string filename)
         {
             file>>FName>>LName>>Username>>Email>>Password>>adminID;
             Admin a(FName,LName,Username,Email,Password,adminID);
-            admins.push_back(&a);
+            admins.push_back(a);
         }
         file.close();
     }
@@ -236,7 +236,7 @@ void loadAdmins(string filename)
 void listAdmins()
 {
     for(auto i=admins.begin();i!=admins.end();i++)
-        cout<<(*i)->ispis()<<endl;
+        cout<<i->getFName()<<endl;
 }
 
 void setupUser(User u)
