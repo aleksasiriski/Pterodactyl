@@ -62,10 +62,10 @@ public:
 	{
 		return Email;
 	}
-    /*string getPassword() //SAMO ZA TESTIRANJE
+    string getPassword() //TREBA DODATI ENKRIPCIJU, OVO SE KORISTI ZA FAJL
     {
         return Password;
-    }*/
+    }
     string generateChars(int iterations,string charset)const
     {
         int n=charset.size(),counter=0;
@@ -125,24 +125,27 @@ public:
             cin >> P;
             int n=P.size();
             bool v=false,m=false,b=false;
-            for(int i=0;i<n;i++)
+            if(n>=8 && n<=16)
             {
-                if(v&&m&&b)
-                    break;
-                if(!v)
+                for(int i=0;i<n;i++)
                 {
-                    if(P[i]>='A' && P[i]<='Z')
-                        v=true;
-                }
-                if(!m)
-                {
-                    if(P[i]>='a' && P[i]<='z')
-                        m=true;
-                }
-                if(!b)
-                {
-                    if(P[i]>='0' && P[i]<='9')
-                        b=true;
+                    if(v&&m&&b)
+                        break;
+                    if(!v)
+                    {
+                        if(P[i]>='A' && P[i]<='Z')
+                            v=true;
+                    }
+                    if(!m)
+                    {
+                        if(P[i]>='a' && P[i]<='z')
+                            m=true;
+                    }
+                    if(!b)
+                    {
+                        if(P[i]>='0' && P[i]<='9')
+                            b=true;
+                    }
                 }
             }
             fflush(stdin); //brise sve uneto posle praznog karaktera
@@ -152,17 +155,13 @@ public:
         }
         Password=P;
 	}
-    virtual void ispis()
-    {
-        cout<<FName<<endl;
-        cout<<"Redovan..."<<endl;
-    }
 };
 class Admin:public User
 {
 protected:
-	static unsigned short adminID;
+    unsigned short adminID;
 public:
+    static unsigned short globalID;
 	Admin():User() {}
     Admin(string FN,string LN,string U,string E,string P,unsigned short ID):User(FN,LN,U,E,P)
     {
@@ -178,16 +177,12 @@ public:
     }
     void setupAdmin()
     {
-    	adminID++;
+        adminID=++globalID;
     	User::setupUser();
     }
     unsigned short getadminID()const
     {
         return adminID;
-    }
-    void ispis()
-    {
-        cout<<"TMINA"<<endl;
     }
 };
 
@@ -198,7 +193,7 @@ void loadUsers(string filename)
     ifstream file(filename);
     if (file.is_open())
     {
-        string line,FName,LName,Username,Email,Password;
+        string FName,LName,Username,Email,Password;
         while(!file.eof())
         {
             file>>FName>>LName>>Username>>Email>>Password;
@@ -215,12 +210,25 @@ void listUsers()
     for(auto i=users.begin();i!=users.end();i++)
         cout<<i->getFName()<<endl;
 }
+void saveUsers(string filename)
+{
+    ofstream file(filename);
+    for(auto i=users.begin();i!=users.end();i++)
+    {
+        file<<i->getFName()<<" ";
+        file<<i->getLName()<<" ";
+        file<<i->getUsername()<<" ";
+        file<<i->getEmail()<<" ";
+        file<<i->getPassword()<<endl;
+    }
+    file.close();
+}
 void loadAdmins(string filename)
 {
     ifstream file(filename);
     if (file.is_open())
     {
-        string line,FName,LName,Username,Email,Password;
+        string FName,LName,Username,Email,Password;
         unsigned short adminID;
         while(!file.eof())
         {
@@ -238,16 +246,30 @@ void listAdmins()
     for(auto i=admins.begin();i!=admins.end();i++)
         cout<<i->getFName()<<endl;
 }
-
-void setupUser(User u)
+void saveAdmins(string filename)
 {
-    u.setupUser();
-    users.push_back(u);
+    ofstream file(filename);
+    for(auto i=admins.begin();i!=admins.end();i++)
+    {
+        file<<i->getFName()<<" ";
+        file<<i->getLName()<<" ";
+        file<<i->getUsername()<<" ";
+        file<<i->getEmail()<<" ";
+        file<<i->getPassword()<<" ";
+        file<<i->getadminID()<<endl;
+    }
+    file.close();
 }
-void setupAdmin(Admin a)
+
+void setupUser(User* u)
 {
-    a.setupAdmin();
-    admins.push_back(a);
+    u->setupUser();
+    users.push_back(*u);
+}
+void setupAdmin(Admin* a)
+{
+    a->setupAdmin();
+    admins.push_back(*a);
 }
 
 #endif // USER_HPP_INCLUDED

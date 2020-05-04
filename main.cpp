@@ -6,31 +6,42 @@
 #include <vector>
 #define MAX 100
 using namespace std;
-//#include "file.hpp"
 #include "location.hpp"
 #include "eggnestpack.hpp"
 #include "user.hpp"
-unsigned short Admin::adminID=0; //brojac ID admina
+unsigned short Admin::globalID=0;
+string userfile="users.txt",adminfile="admins.txt";
+void pocetak()
+{
+	loadUsers(userfile);
+	loadAdmins(adminfile);
+	Admin::globalID=admins.rbegin()->getadminID();
+}
+void kraj()
+{
+	saveUsers(userfile);
+	saveAdmins(adminfile);
+}
 int main()
 {
-    srand(time(NULL)); //seed za rand()
-    loadUsers("users.txt");
+	srand(time(NULL)); //seed za rand()
+    pocetak();
+
     listUsers();
-    loadAdmins("admins.txt");
+    cout << endl;
     listAdmins();
 
+	Location First; // pravi jednu lokaciju sa jednim node i jednim serverom i jednim database
 
-	//Location First; // pravi jednu lokaciju sa jednim node i jednim serverom i jednim database
-
-	//User Marko;
-	//setupUser(Marko);
+	User u;
+	setupUser(&u);
 	//cout << Marko.resetPassword() << endl;
 	//Marko.changePassword();
 
-	/*Admin Aleksa;
-	setupAdmin(Aleksa);
-	cout << Aleksa.resetPassword() << endl;
-	Aleksa.changePassword();*/
+	Admin a;
+	setupAdmin(&a);
+	//cout << Aleksa.resetPassword() << endl;
+	//Aleksa.changePassword();
 
 	/*predlog funkcionalnosti: napraviti lokaciju i sve pod njom kao gore, sa dodeljenim cpu, ram i rom
 	i dodeliti taj jedan server obicnom useru*/
@@ -46,5 +57,6 @@ int main()
 
 	/*predlog funkcionalnosti: dodati novu lokaciju node i 2 servera dodeljena 2 normalna usera*/
 
+	kraj();
 	return 0; //zatvoriti program sa svim izmenama sacuvanim u fajlu
 }
