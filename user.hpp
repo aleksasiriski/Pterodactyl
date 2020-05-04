@@ -152,6 +152,11 @@ public:
         }
         Password=P;
 	}
+    virtual void ispis()
+    {
+        cout<<FName<<endl;
+        cout<<"Redovan..."<<endl;
+    }
 };
 class Admin:public User
 {
@@ -176,6 +181,73 @@ public:
     	adminID++;
     	User::setupUser();
     }
+    unsigned short getadminID()const
+    {
+        return adminID;
+    }
+    void ispis()
+    {
+        cout<<"TMINA"<<endl;
+    }
 };
+
+vector<User*> users;
+vector<Admin*> admins;
+void loadUsers(string filename)
+{
+    ifstream file(filename);
+    if (file.is_open())
+    {
+        string line,FName,LName,Username,Email,Password;
+        while(!file.eof())
+        {
+            file>>FName>>LName>>Username>>Email>>Password;
+            User u(FName,LName,Username,Email,Password);
+            users.push_back(&u);
+        }
+        file.close();
+    }
+    else
+        cout << "Unable to open file.";
+}
+void listUsers()
+{
+    for(auto i=users.begin();i!=users.end();i++)
+        cout<<(*i)->ispis()<<endl;
+}
+void loadAdmins(string filename)
+{
+    ifstream file(filename);
+    if (file.is_open())
+    {
+        string line,FName,LName,Username,Email,Password;
+        unsigned short adminID;
+        while(!file.eof())
+        {
+            file>>FName>>LName>>Username>>Email>>Password>>adminID;
+            Admin a(FName,LName,Username,Email,Password,adminID);
+            admins.push_back(&a);
+        }
+        file.close();
+    }
+    else
+        cout << "Unable to open file.";
+}
+void listAdmins()
+{
+    for(auto i=admins.begin();i!=admins.end();i++)
+        cout<<(*i)->ispis()<<endl;
+}
+
+void setupUser(User u)
+{
+    u.setupUser();
+    users.push_back(u);
+}
+void setupAdmin(Admin a)
+{
+    a.setupAdmin();
+    admins.push_back(a);
+}
 
 #endif // USER_HPP_INCLUDED
