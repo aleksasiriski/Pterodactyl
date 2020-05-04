@@ -1,7 +1,12 @@
 #include <iostream>
+#include <string>
+#include <fstream>
 #include <cstdlib>
 #include <ctime>
+#include <vector>
+#define MAX 100
 using namespace std;
+//#include "file.hpp"
 #include "location.hpp"
 #include "eggnestpack.hpp"
 #include "user.hpp"
@@ -9,12 +14,23 @@ unsigned short Admin::adminID=0; //brojac ID admina
 int main()
 {
     srand(time(NULL)); //seed za rand()
-	Location First; // pravi jednu lokaciju sa jednim node i jednim serverom i jednim database
+    loadUsers("users.txt");
+    listUsers();
+    loadAdmins("admins.txt");
+    listAdmins();
 
-	User Marko; // obican user
-	Marko.setupUser(); // inicijalizacija obicnog usera
-	cout << Marko.resetPassword() << endl;
-	Marko.changePassword();
+
+	//Location First; // pravi jednu lokaciju sa jednim node i jednim serverom i jednim database
+
+	//User Marko;
+	//setupUser(Marko);
+	//cout << Marko.resetPassword() << endl;
+	//Marko.changePassword();
+
+	/*Admin Aleksa;
+	setupAdmin(Aleksa);
+	cout << Aleksa.resetPassword() << endl;
+	Aleksa.changePassword();*/
 
 	/*predlog funkcionalnosti: napraviti lokaciju i sve pod njom kao gore, sa dodeljenim cpu, ram i rom
 	i dodeliti taj jedan server obicnom useru*/
