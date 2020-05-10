@@ -80,6 +80,13 @@ public:
 	{
 		N.setAROM(ARO);
 	}
+	friend ostream& operator<<(ostream& output, const Location& l)
+    {
+        output<<"Output of Location:"<<endl;
+        output<<"CC: "<<l.CC<<endl;
+        output<<l.N<<endl;
+        return output;
+    }
 };
 
 #endif // LOCATION_HPP_INCLUDED

@@ -51,6 +51,15 @@ public:
 	{
 		ROM=RO;
 	}
+	friend ostream& operator<<(ostream& output, const Server& s)
+    {
+        output<<"Output of SERVER:"<<endl;
+        output<<"CPU: "<<s.CPU<<endl;
+        output<<"RAM: "<<s.RAM<<endl;
+        output<<"ROM: "<<s.ROM<<endl;
+        output<<s.DB<<endl;
+        return output;
+    }
 };
 
 #endif // SERVER_HPP_INCLUDED

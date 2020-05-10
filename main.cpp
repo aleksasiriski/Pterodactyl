@@ -33,8 +33,18 @@ int main()
 
 	Location First; // pravi jednu lokaciju sa jednim node i jednim serverom i jednim database
 
+	Database db;
+	cout << db;
+    Server s;
+    cout << s;
+    Node n;
+    cout << n;
+    Location l;
+    cout << l;
+
 	User u;
 	setupUser(&u);
+	cout << u;
 	//cout << Marko.resetPassword() << endl;
 	//Marko.changePassword();
 
