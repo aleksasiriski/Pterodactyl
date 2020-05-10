@@ -155,6 +155,15 @@ public:
         }
         Password=P;
 	}
+    friend ostream& operator<<(ostream& output, const User& u)
+    {
+        output<<"Output of user:"<<endl;
+        output<<"First name: "<<u.FName<<endl;
+        output<<"Last name: "<<u.LName<<endl;
+        output<<"Username: "<<u.Username<<endl;
+        output<<"Email: "<<u.Email<<endl;
+        return output;
+    }
 };
 class Admin:public User
 {

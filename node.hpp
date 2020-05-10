@@ -76,6 +76,15 @@ public:
 	{
 		AROM=ARO;
 	}
+	friend ostream& operator<<(ostream& output, const Node& n)
+    {
+        output<<"Output of NODE:"<<endl;
+        output<<"ACPU: "<<n.ACPU<<endl;
+        output<<"ARAM: "<<n.ARAM<<endl;
+        output<<"AROM: "<<n.AROM<<endl;
+        output<<n.S<<endl;
+        return output;
+    }
 };
 
 #endif // NODE_HPP_INCLUDED
