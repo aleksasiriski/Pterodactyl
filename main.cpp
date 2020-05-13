@@ -10,7 +10,7 @@ using namespace std;
 #include "eggnestpack.hpp"
 #include "user.hpp"
 unsigned short Admin::globalID=0;
-string userfile="users.txt",adminfile="admins.txt";
+const string userfile="users.txt",adminfile="admins.txt";
 void startprogram()
 {
 	loadUsers(userfile);
@@ -31,7 +31,7 @@ int main()
     cout << endl;
     listAdmins();
 
-	/*Location First;
+	Location First;
 
 	Database db;
 	cout << db;
@@ -40,13 +40,13 @@ int main()
     Node n;
     cout << n;
     Location l;
-    cout << l;*/
+    cout << l;
 
 	User u;
 	setup(&u);
 	cout << u;
-	//cout << Marko.resetPassword() << endl;
-	//Marko.changePassword();
+	cout << Marko.resetPassword() << endl;
+	Marko.changePassword();
 
 	Admin a;
 	setup(&a);
