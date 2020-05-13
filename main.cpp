@@ -11,13 +11,13 @@ using namespace std;
 #include "user.hpp"
 unsigned short Admin::globalID=0;
 string userfile="users.txt",adminfile="admins.txt";
-void pocetak()
+void startprogram()
 {
 	loadUsers(userfile);
 	loadAdmins(adminfile);
 	Admin::globalID=admins.rbegin()->getadminID();
 }
-void kraj()
+void endprogram()
 {
 	saveUsers(userfile);
 	saveAdmins(adminfile);
@@ -25,7 +25,7 @@ void kraj()
 int main()
 {
 	srand(time(NULL)); //seed za rand()
-    pocetak();
+    startprogram();
 
     listUsers();
     cout << endl;
@@ -64,6 +64,6 @@ int main()
 	/*predlog funkcionalnosti: dodati novi node u istoj lokaciji sa jos jednim serverom i dodeliti ga
 	nekom useru, a zatim nakon provere da funkcionise obrisati server i user a ostaviti node u memoriji*/
 
-	kraj();
+	endprogram();
 	return 0;
 }
