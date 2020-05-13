@@ -32,7 +32,8 @@ public:
 		Password=u.Password;
 
     }
-    void setupUser() //unos korisnika
+    virtual bool isadmin(){return false;}
+    virtual void setup() //unos korisnika
     {
     	cout << "First name: ";
     	cin >> FName;
@@ -155,6 +156,10 @@ public:
         }
         Password=P;
 	}
+    virtual unsigned short getadminID()const
+    {
+        return 0;
+    }
     friend ostream& operator<<(ostream& output, const User& u)
     {
         output<<"Output of user:"<<endl;
@@ -184,19 +189,30 @@ public:
     {
     	adminID=ID;
     }
-    void setupAdmin()
+    bool isadmin(){return true;}
+    void setup()
     {
+        User::setup();
         adminID=++globalID;
-    	User::setupUser();
     }
     unsigned short getadminID()const
     {
         return adminID;
     }
+    friend ostream& operator<<(ostream& output, const Admin& a)
+    {
+        output<<"Output of user:"<<endl;
+        output<<"First name: "<<a.FName<<endl;
+        output<<"Last name: "<<a.LName<<endl;
+        output<<"Username: "<<a.Username<<endl;
+        output<<"Email: "<<a.Email<<endl;
+        output<<"ID: "<<a.adminID<<endl;
+        return output;
+    }
 };
 
-vector<User> users;
-vector<Admin> admins;
+vector<User*> users;
+vector<Admin*> admins;
 void loadUsers(string filename)
 {
     ifstream file(filename);
@@ -206,7 +222,7 @@ void loadUsers(string filename)
         while(!file.eof())
         {
             file>>FName>>LName>>Username>>Email>>Password;
-            User u(FName,LName,Username,Email,Password);
+            User* u(FName,LName,Username,Email,Password);
             users.push_back(u);
         }
         file.close();
@@ -216,13 +232,13 @@ void loadUsers(string filename)
 }
 void listUsers()
 {
-    for(auto i=users.begin();i!=users.end();i++)
+    for(auto i=users->begin();i!=users->end();i++)
         cout<<i->getFName()<<endl;
 }
 void saveUsers(string filename)
 {
     ofstream file(filename);
-    for(auto i=users.begin();i!=users.end();i++)
+    for(auto i=users->begin();i!=users->end();i++)
     {
         file<<i->getFName()<<" ";
         file<<i->getLName()<<" ";
@@ -242,7 +258,7 @@ void loadAdmins(string filename)
         while(!file.eof())
         {
             file>>FName>>LName>>Username>>Email>>Password>>adminID;
-            Admin a(FName,LName,Username,Email,Password,adminID);
+            Admin* a(FName,LName,Username,Email,Password,adminID);
             admins.push_back(a);
         }
         file.close();
@@ -252,13 +268,13 @@ void loadAdmins(string filename)
 }
 void listAdmins()
 {
-    for(auto i=admins.begin();i!=admins.end();i++)
+    for(auto i=admins->begin();i!=admins->end();i++)
         cout<<i->getFName()<<endl;
 }
 void saveAdmins(string filename)
 {
     ofstream file(filename);
-    for(auto i=admins.begin();i!=admins.end();i++)
+    for(auto i=admins->begin();i!=admins->end();i++)
     {
         file<<i->getFName()<<" ";
         file<<i->getLName()<<" ";
@@ -270,15 +286,13 @@ void saveAdmins(string filename)
     file.close();
 }
 
-void setupUser(User* u)
+void setup(User* u)
 {
-    u->setupUser();
-    users.push_back(*u);
-}
-void setupAdmin(Admin* a)
-{
-    a->setupAdmin();
-    admins.push_back(*a);
+    u->setup();
+    if(u->isadmin())
+        admins.push_back(u);
+    else
+        users.push_back(u);
 }
 
 #endif // USER_HPP_INCLUDED
