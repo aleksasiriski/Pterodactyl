@@ -15,7 +15,7 @@ void startprogram()
 {
 	loadUsers(userfile);
 	loadAdmins(adminfile);
-	//Admin::globalID=admins.rbegin()->getadminID();
+	Admin::globalID=(*(admins.rbegin()))->getadminID();
 }
 void endprogram()
 {
