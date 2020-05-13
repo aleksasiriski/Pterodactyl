@@ -45,12 +45,14 @@ int main()
 	User u;
 	setupUser(&u);
 	cout << u;
+	u.whoami();
 	//cout << Marko.resetPassword() << endl;
 	//Marko.changePassword();
 
 	Admin a;
 	setupAdmin(&a);
 	cout << a;
+	a.whoami();
 	//cout << Aleksa.resetPassword() << endl;
 	//Aleksa.changePassword();
 

@@ -32,6 +32,7 @@ public:
 		Password=u.Password;
 
     }
+    virtual void whoami(){cout<<"Ja sam user."<<endl;}
     virtual bool isadmin(){return false;}
     virtual void setup() //unos korisnika
     {
@@ -152,7 +153,7 @@ public:
             fflush(stdin); //brise sve uneto posle praznog karaktera
             if(v&&m&&b)
                 break;
-            cout << endl << "Weak password! Try again." << endl;
+            cout << endl << "Incorrect password format! Try again." << endl;
         }
         Password=P;
 	}
@@ -185,6 +186,7 @@ public:
     {
     	adminID=ID;
     }
+    void whoami(){cout<<"Ja sam admin."<<endl;}
     bool isadmin(){return true;}
     void setup()
     {
