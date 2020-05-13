@@ -156,10 +156,6 @@ public:
         }
         Password=P;
 	}
-    virtual unsigned short getadminID()const
-    {
-        return 0;
-    }
     friend ostream& operator<<(ostream& output, const User& u)
     {
         output<<"Output of user:"<<endl;
