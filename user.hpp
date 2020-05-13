@@ -211,8 +211,8 @@ public:
     }
 };
 
-vector<User*> users;
-vector<Admin*> admins;
+vector<User> users;
+vector<Admin> admins;
 void loadUsers(string filename)
 {
     ifstream file(filename);
