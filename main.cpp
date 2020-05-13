@@ -31,7 +31,7 @@ int main()
     cout << endl;
     listAdmins();
 
-	Location First;
+	/*Location First;
 
 	Database db;
 	cout << db;
@@ -40,16 +40,17 @@ int main()
     Node n;
     cout << n;
     Location l;
-    cout << l;
+    cout << l;*/
 
 	User u;
-	setupUser(&u);
+	setup(&u);
 	cout << u;
 	//cout << Marko.resetPassword() << endl;
 	//Marko.changePassword();
 
 	Admin a;
-	setupAdmin(&a);
+	setup(&a);
+	cout << a;
 	//cout << Aleksa.resetPassword() << endl;
 	//Aleksa.changePassword();
 
