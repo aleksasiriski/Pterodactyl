@@ -218,6 +218,7 @@ void loadUsers(string filename)
         while(!file.eof())
         {
             file>>FName>>LName>>Username>>Email>>Password;
+            if(file.eof()) break;
             User* u=new User(FName,LName,Username,Email,Password);
             users.push_back(u);
         }
