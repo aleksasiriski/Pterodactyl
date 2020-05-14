@@ -1,7 +1,5 @@
 #ifndef USER_HPP_INCLUDED
 #define USER_HPP_INCLUDED
-#include <algorithm>
-#include <cstdlib>
 class User
 {
 protected:
@@ -32,7 +30,7 @@ public:
 		Password=u.Password;
 
     }
-    virtual bool isadmin(){return false;}
+    bool isadmin(){return false;}
     virtual void setup() //unos korisnika
     {
     	cout << "First name: ";
@@ -63,7 +61,7 @@ public:
 	{
 		return Email;
 	}
-    string getPassword() //TREBA DODATI ENKRIPCIJU, OVO SE KORISTI ZA FAJL
+    string getPassword()const //TREBA DODATI ENKRIPCIJU, OVO SE KORISTI ZA FAJL
     {
         return Password;
     }
@@ -124,7 +122,7 @@ public:
         {
             cout << "Password(8-16 chars with atleast one big, small letter and number): ";
             cin >> P;
-            int n=P.size();
+            /*int n=P.size();
             bool v=false,m=false,b=false;
             if(n>=8 && n<=16)
             {
@@ -150,7 +148,7 @@ public:
                 }
             }
             fflush(stdin); //brise sve uneto posle praznog karaktera
-            if(v&&m&&b)
+            if(v&&m&&b)*/
                 break;
             cout << endl << "Weak password! Try again." << endl;
         }
@@ -206,90 +204,5 @@ public:
         return output;
     }
 };
-
-vector<User*> users;
-vector<Admin*> admins;
-void loadUsers(string filename)
-{
-    ifstream file(filename);
-    if (file.is_open())
-    {
-        string FName,LName,Username,Email,Password;
-        while(!file.eof())
-        {
-            file>>FName>>LName>>Username>>Email>>Password;
-            if(file.eof()) break;
-            User* u=new User(FName,LName,Username,Email,Password);
-            users.push_back(u);
-        }
-        file.close();
-    }
-    else
-        cout << "Unable to open file.";
-}
-void listUsers()
-{
-    for(auto i=users.begin();i!=users.end();i++)
-        cout<<(*i)->getFName()<<endl;
-}
-void saveUsers(string filename)
-{
-    ofstream file(filename);
-    for(auto i=users.begin();i!=users.end();i++)
-    {
-        file<<(*i)->getFName()<<" ";
-        file<<(*i)->getLName()<<" ";
-        file<<(*i)->getUsername()<<" ";
-        file<<(*i)->getEmail()<<" ";
-        file<<(*i)->getPassword()<<endl;
-    }
-    file.close();
-}
-void loadAdmins(string filename)
-{
-    ifstream file(filename);
-    if (file.is_open())
-    {
-        string FName,LName,Username,Email,Password;
-        unsigned short adminID;
-        while(!file.eof())
-        {
-            file>>FName>>LName>>Username>>Email>>Password>>adminID;
-            Admin* a=new Admin(FName,LName,Username,Email,Password,adminID);
-            admins.push_back(a);
-        }
-        file.close();
-    }
-    else
-        cout << "Unable to open file.";
-}
-void listAdmins()
-{
-    for(auto i=admins.begin();i!=admins.end();i++)
-        cout<<(*i)->getFName()<<endl;
-}
-void saveAdmins(string filename)
-{
-    ofstream file(filename);
-    for(auto i=admins.begin();i!=admins.end();i++)
-    {
-        file<<(*i)->getFName()<<" ";
-        file<<(*i)->getLName()<<" ";
-        file<<(*i)->getUsername()<<" ";
-        file<<(*i)->getEmail()<<" ";
-        file<<(*i)->getPassword()<<" ";
-        file<<(*i)->getadminID()<<endl;
-    }
-    file.close();
-}
-
-void setup(User* u)
-{
-    u->setup();
-    if(u->isadmin())
-        admins.push_back((Admin*)u);
-    else
-        users.push_back(u);
-}
 
 #endif // USER_HPP_INCLUDED
