@@ -45,8 +45,8 @@ int main()
 	User u;
 	setup(&u);
 	cout << u;
-	cout << Marko.resetPassword() << endl;
-	Marko.changePassword();
+	cout << u.resetPassword() << endl;
+	u.changePassword();
 
 	Admin a;
 	setup(&a);
