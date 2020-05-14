@@ -156,11 +156,7 @@ public:
 	}
     friend ostream& operator<<(ostream& output, const User& u)
     {
-        output<<"Output of user:"<<endl;
-        output<<"First name: "<<u.FName<<endl;
-        output<<"Last name: "<<u.LName<<endl;
-        output<<"Username: "<<u.Username<<endl;
-        output<<"Email: "<<u.Email<<endl;
+        output<<u.FName<<" "<<u.LName<<" "<<u.Username<<" "<<u.Email<<" "<<endl;
         return output;
     }
 };
@@ -195,12 +191,7 @@ public:
     }
     friend ostream& operator<<(ostream& output, const Admin& a)
     {
-        output<<"Output of user:"<<endl;
-        output<<"First name: "<<a.FName<<endl;
-        output<<"Last name: "<<a.LName<<endl;
-        output<<"Username: "<<a.Username<<endl;
-        output<<"Email: "<<a.Email<<endl;
-        output<<"ID: "<<a.adminID<<endl;
+        output<<a.FName<<" "<<a.LName<<" "<<a.Username<<" "<<a.Email<<" "<<a.adminID<<endl;
         return output;
     }
 };
