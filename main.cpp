@@ -5,7 +5,7 @@ tmina outputMenu()
 {
 	system(clear);
 	cout << "----- Welcome! What do you want to do? -----\n";
-	cout << "\t1) Create a new user\n\t2) List users\n\t3) Search users\n\t4) Delete user\n";
+	cout << "\t1) Create a new user\n\t2) List users\n\t3) Search users\n\t4) Delete users\n";
 	cout << "\tq) Exit program\n";
 	cout << "\t >>> ";
 }
@@ -26,7 +26,7 @@ int main()
 			case '1': p.CreateUser(); break;
 			case '2': p.ListUsers(); break;
 			case '3': p.SearchUsers(); break;
-			//case '4': p.DeleteUser(); break;
+			case '4': p.DeleteUsers(); break;
 		}
 	}
 
