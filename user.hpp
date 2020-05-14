@@ -42,7 +42,6 @@ public:
     	cout << "Email: ";
     	cin >> Email;
     	changePassword();
-    	cout << endl << "Welcome " << FName << " " << LName << " to Pterodactyl panel!" << endl;
     }
 
 	string getFName()const
@@ -122,7 +121,7 @@ public:
         {
             cout << "Password(8-16 chars with atleast one big, small letter and number): ";
             cin >> P;
-            /*int n=P.size();
+            int n=P.size();
             bool v=false,m=false,b=false;
             if(n>=8 && n<=16)
             {
@@ -148,7 +147,7 @@ public:
                 }
             }
             fflush(stdin); //brise sve uneto posle praznog karaktera
-            if(v&&m&&b)*/
+            if(v&&m&&b)
                 break;
             cout << endl << "Weak password! Try again." << endl;
         }
