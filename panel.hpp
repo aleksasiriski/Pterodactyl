@@ -86,6 +86,7 @@ public:
             while(!file.eof())
             {
                 file>>FName>>LName>>Username>>Email>>Password>>adminID;
+                if(file.eof()) break;
                 Admin* a=new Admin(FName,LName,Username,Email,Password,adminID);
                 admins.push_back(a);
             }

@@ -30,7 +30,7 @@ public:
 		Password=u.Password;
 
     }
-    bool isadmin(){return false;}
+    virtual bool isadmin(){return false;}
     virtual void setup() //unos korisnika
     {
     	cout << "First name: ";
