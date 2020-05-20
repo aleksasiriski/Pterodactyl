@@ -1,5 +1,10 @@
 #ifndef USER_HPP_INCLUDED
 #define USER_HPP_INCLUDED
+#include "picosha2.h"
+string makeHash(string input)
+{
+    return picosha2::hash256_hex_string(input);
+}
 class User
 {
 protected:
@@ -92,7 +97,9 @@ public:
             Password[indexa]=Password[indexb];
             Password[indexb]=tmp;
         }
-        return Password;
+        string tmpPassword=Password;
+        Password=makeHash(Password);
+        return tmpPassword;
 	}
 	void setFName(string FName1)
 	{
@@ -151,7 +158,7 @@ public:
                 break;
             cout << endl << "Weak password! Try again." << endl;
         }
-        Password=P;
+        Password=makeHash(P);
 	}
     friend ostream& operator<<(ostream& output, const User& u)
     {
@@ -163,8 +170,8 @@ class Admin:public User
 {
 protected:
     unsigned short adminID;
-public:
     static unsigned short globalID;
+public:
 	Admin():User() {}
     Admin(string FN,string LN,string U,string E,string P,unsigned short ID):User(FN,LN,U,E,P)
     {
@@ -187,6 +194,10 @@ public:
     unsigned short getadminID()const
     {
         return adminID;
+    }
+    static void setGlobalID(unsigned short ID=0)
+    {
+        globalID=ID;
     }
     friend ostream& operator<<(ostream& output, const Admin& a)
     {
