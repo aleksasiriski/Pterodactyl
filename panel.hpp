@@ -37,8 +37,8 @@ public:
         this->userfile=userfile;
         this->adminfile=adminfile;
         loadUsers();
-        loadAdmins();
-        Admin::globalID=(*(admins.rbegin()))->getadminID();
+        if(loadAdmins())
+            Admin::setGlobalID((*(admins.rbegin()))->getadminID());
     }
     void loadUsers()
     {
@@ -56,7 +56,10 @@ public:
             file.close();
         }
         else
-            cout << "Unable to open file.";
+        {
+            cout << "Unable to open file. Creating " << userfile << endl;
+            saveUsers();
+        }
     }
     void listUsers()const
     {
@@ -76,24 +79,32 @@ public:
         }
         file.close();
     }
-    void loadAdmins()
+    bool loadAdmins()
     {
         ifstream file(adminfile);
         if (file.is_open())
         {
             string FName,LName,Username,Email,Password;
             unsigned short adminID;
+            bool prazan=true;
             while(!file.eof())
             {
                 file>>FName>>LName>>Username>>Email>>Password>>adminID;
                 if(file.eof()) break;
                 Admin* a=new Admin(FName,LName,Username,Email,Password,adminID);
                 admins.push_back(a);
+                prazan=false;
             }
             file.close();
+            if(prazan) return false;
+            return true;
         }
         else
-            cout << "Unable to open file.";
+        {
+            cout << "Unable to open file. Creating " << adminfile << endl;
+            saveAdmins();
+            return false;
+        }
     }
     void listAdmins()const
     {
@@ -314,5 +325,80 @@ public:
         else
             cout << "Failed to delete user, not found.\n\n";
     }}
+    void ChangeUsers()
+    {while(1){
+        string choice;
+        cout << "\t----- Change users -----\n";
+        cout << "\tc) Change user\n";
+        cout << "\tq) Exit changing\n";
+        cout << "\t >>> ";
+        cin >> choice;
+        if(toexit(choice))
+            break;
+        system(clear);
+        cout << "\t ----- Choose user to change -----\n";
+        listUsers();
+        cout << "\t >>> ";
+        int ichoice;
+        cin >> ichoice;
+        ichoice--;
+        while(1){
+        system(clear);
+        cout << "\t ----- Changing user... -----\n";
+        auto i=users.begin()+ichoice;
+        cout << **i;
+        cout << "\t ----- Choose what to change -----\n";
+        cout << "\t1) FName\n\t2) LName\n\t3) Email\n\t4) Password\n\te) Exit\n";
+        cout << "\t >>> ";
+        cin >> choice;
+        if(toexit(choice))
+            break;
+        char cchoice='4';
+        if(choice=="1")
+            cchoice='1';
+        else if(choice=="2")
+            cchoice='2';
+        else if(choice=="3")
+            cchoice='3';
+        switch(cchoice)
+        {
+            case '1':
+            {
+                string NFName;
+                cout << "\tNew first name: ";
+                cin >> NFName;
+                (*i)->setFName(NFName);
+                break;
+            }
+            case '2':
+            {
+                string NLName;
+                cout << "\tNew last name: ";
+                cin >> NLName;
+                (*i)->setLName(NLName);
+                break;
+            }
+            case '3':
+            {
+                string NEmail;
+                cout << "\tNew Email address: ";
+                cin >> NEmail;
+                (*i)->setEmail(NEmail);
+                break;
+            }
+            case '4':
+            {
+                char tchoice;
+                cout << "\tr) Random password\n\tc) Change password\n";
+                cout << "\t >>> ";
+                cin >> tchoice;
+                if(tchoice=='r')
+                    (*i)->resetPassword();
+                else
+                    (*i)->changePassword();
+                break;
+            }
+        }
+    }}}
 };
 #endif //PANEL_HPP_INCLUDED

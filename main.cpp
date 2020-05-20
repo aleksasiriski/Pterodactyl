@@ -5,7 +5,7 @@ tmina outputMenu()
 {
 	system(clear);
 	cout << "----- Welcome! What do you want to do? -----\n";
-	cout << "\t1) Create a new user\n\t2) List users\n\t3) Search users\n\t4) Delete users\n";
+	cout << "\t1) Create a new user\n\t2) List users\n\t3) Search users\n\t4) Delete users\n\t5) Change users\n";
 	cout << "\tq) Exit program\n";
 	cout << "\t >>> ";
 }
@@ -27,8 +27,13 @@ int main()
 			case '2': p.ListUsers(); break;
 			case '3': p.SearchUsers(); break;
 			case '4': p.DeleteUsers(); break;
+			case '5': p.ChangeUsers(); break;
 		}
 	}
+
+	
+
+
 
 	/*funkcionalnost 1: napraviti u lokaciju, node i dodeliti server obicnom useru*/
 
