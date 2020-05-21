@@ -8,12 +8,11 @@
 #include <ctime>
 #include <vector>
 using namespace std;
-#define MAX 100
 #include "location.hpp"
 #include "eggnestpack.hpp"
 #include "user.hpp"
 const char clear[]="clear"; //UNIX
-//const string clear="cls"; //Windows
+//const char clear[]="cls"; //Windows
 bool toexit(string choice)
 {
     if( 
@@ -63,8 +62,9 @@ public:
     }
     void listUsers()const
     {
+        int counter=1;
         for(auto i=users.begin();i!=users.end();i++)
-            cout<<"\t"<<**i<<endl;
+            cout<<"\t"<<counter++<<") "<<**i<<endl;
     }
     void saveUsers()const
     {
