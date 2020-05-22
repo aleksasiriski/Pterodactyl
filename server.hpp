@@ -4,17 +4,20 @@
 class Server
 {
 private:
+	string Name;
 	int CPU,RAM,ROM;
 	Database DB;
 public:
 	Server():DB()
 	{
+		Name="";
 		CPU=1;
 		RAM=2;
 		ROM=5;
 	}
-	Server(int C,int RA,int RO,string dbname,string dbip,string dbuser,string dbpassword):DB(dbname,dbip,dbuser,dbpassword)
+	Server(string N,int C,int RA,int RO,string dbname,string dbip,string dbuser,string dbpassword):DB(dbname,dbip,dbuser,dbpassword)
 	{
+		Name=N;
 		CPU=C;
 		RAM=RA;
 		ROM=RO;
@@ -53,11 +56,11 @@ public:
 	}
 	friend ostream& operator<<(ostream& output, const Server& s)
     {
-        output<<"Output of SERVER:"<<endl;
-        output<<"CPU: "<<s.CPU<<endl;
-        output<<"RAM: "<<s.RAM<<endl;
-        output<<"ROM: "<<s.ROM<<endl;
-        output<<s.DB<<endl;
+        output<<"Name: "<<" ";
+        output<<"CPU: "<<s.CPU<<" ";
+        output<<"RAM: "<<s.RAM<<" ";
+        output<<"ROM: "<<s.ROM<<" ";
+        output<<s.DB;
         return output;
     }
 };

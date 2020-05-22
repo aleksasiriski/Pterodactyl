@@ -5,86 +5,92 @@ class Location
 {
 private:
 	string CC;
-	Node N;
+	vector<Node*> nodes;
 public:
-	Location():N()
+	Location(string CC)
 	{
-		CC="RS";
+		this->CC=CC;
 	}
-	Location(string CCC,int AC,int ARA,int ARO,int C,int RA,int RO,string dbname,string dbip,string dbuser,string dbpassword)
-	:N(AC,ARA,ARO,C,RA,RO,dbname,dbip,dbuser,dbpassword)
+	~Location()
 	{
-		CC=CCC;
+		for(auto i=nodes.begin();i!=nodes.end();i++)
+			delete *i;
 	}
-	void setCC(string CCC)
+	void setCC(string CC)
 	{
-		CC=CCC;
+		this->CC=CC;
 	}
 	string getCC()const
 	{
 		return CC;
 	}
-	string getDB()const
+	Node* getNode()const
 	{
-		return N.getDB();
+		ListNodes();
+		cout << "\t >>> ";
+		int choice;
+		cin >> choice;
+		choice--;
+		return *(nodes.begin()+choice);
 	}
-	void setDB(string dbname,string dbip,string dbuser,string dbpassword)
+	void AddNode()
 	{
-		N.setDB(dbname,dbip,dbuser,dbpassword);
+		int AC,ARA,ARO,C,RA,RO;
+		string Name,SName,dbname,dbip,dbuser,dbpassword;
+		cout << "\tNode name >>> ";
+		cin >> Name;
+		cout << "\tAvailable CPU >>> ";
+		cin >> AC;
+		cout << "\tAvailable RAM >>> ";
+		cin >> ARA;
+		cout << "\tAvailable ROM >>> ";
+		cin >> ARO;
+		cout << "\tServer name >>> ";
+		cin >> SName;
+		cout << "\tServer CPU >>> ";
+		cin >> C;
+		cout << "\tServer RAM >>> ";
+		cin >> RA;
+		cout << "\tServer ROM >>> ";
+		cin >> RO;
+		cout << "\tDatabase name >>> ";
+		cin >> dbname;
+		cout << "\tDatabase IP >>> ";
+		cin >> dbip;
+		cout << "\tDatabase user >>> ";
+		cin >> dbuser;
+		cout << "\tDatabase password >>> ";
+		cin >> dbpassword;
+		Node* n=new Node(Name,AC,ARA,ARO,SName,C,RA,RO,dbname,dbip,dbuser,dbpassword);
+		nodes.push_back(n);
 	}
-	int getCPU()const
+	void ListNodes()const
 	{
-		return N.getCPU();
+		if(nodes.empty())
+        {
+            cout << "Nodes do not exist.\n";
+            return;
+        }
+		int counter=1;
+		for(auto i=nodes.begin();i!=nodes.end();i++)
+			cout << counter++ << ") " << **i << endl;
 	}
-	void setCPU(int C)
+	void DeleteNode()
 	{
-		N.setCPU(C);
-	}
-	int getRAM()const
-	{
-		return N.getRAM();
-	}
-	void setRAM(int RA)
-	{
-		N.setRAM(RA);
-	}
-	int getROM()const
-	{
-		return N.getROM();
-	}
-	void setROM(int RO)
-	{
-		N.setROM(RO);
-	}
-	int getACPU()const
-	{
-		return N.getACPU();
-	}
-	void setACPU(int AC)
-	{
-		N.setACPU(AC);
-	}
-	int getARAM()const
-	{
-		return N.getARAM();
-	}
-	void setARAM(int ARA)
-	{
-		N.setARAM(ARA);
-	}
-	int getAROM()const
-	{
-		return N.getAROM();
-	}
-	void setAROM(int ARO)
-	{
-		N.setAROM(ARO);
+		cout << "\t----- Select node to delete -----\n";
+		ListNodes();
+		if(nodes.empty())
+            return;
+		cout << "\t >>> ";
+		int choice;
+		cin >> choice;
+		choice--;
+		delete *(nodes.begin()+choice);
+		nodes.erase(nodes.begin()+choice);
 	}
 	friend ostream& operator<<(ostream& output, const Location& l)
     {
-        output<<"Output of Location:"<<endl;
-        output<<"CC: "<<l.CC<<endl;
-        output<<l.N<<endl;
+        output<<l.CC<<endl;
         return output;
     }
 };

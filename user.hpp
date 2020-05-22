@@ -9,16 +9,9 @@ class User
 {
 protected:
 	string FName,LName,Username,Email,Password;
+    vector<Node*> nodes;
 public:
-	User()
-	{
-		FName="";
-		LName="";
-		Username="";
-		Email="";
-		Password="";
-	}
-	User(string FN,string LN,string U,string E,string P)
+	User(string FN="",string LN="",string U="",string E="",string P="")
 	{
 		FName=FN;
 		LName=LN;
@@ -26,6 +19,14 @@ public:
 		Email=E;
 		Password=P;
 	}
+    ~User()
+    {
+        string userfile=Username+".txt";
+        ofstream file(userfile);
+        for(auto i=nodes.begin();i!=nodes.end();i++)
+            file<<**i<<endl;
+        file.close();
+    }
 	User(const User& u)
     {
         FName=u.FName;
@@ -35,18 +36,36 @@ public:
 		Password=u.Password;
 
     }
+    void pushNode(Node* n)
+    {
+        nodes.push_back(n);
+    }
+    void ListNodes()
+    {
+        if(nodes.empty())
+        {
+            cout << "Nodes do not exist.\n";
+            return;
+        }
+        int counter=1;
+        for(auto i=nodes.begin();i!=nodes.end();i++)
+            cout << counter++ << ") " << **i << endl;
+        cout<<"Continue...";
+        char cont;
+        cin >> cont;
+    }
     virtual bool isadmin(){return false;}
     virtual void setup() //unos korisnika
     {
-    	cout << "First name: ";
+    	cout << "\tFirst name >>> ";
     	cin >> FName;
-    	cout << "Last name: ";
+    	cout << "\tLast name >>> ";
     	cin >> LName;
-    	cout << "Username: ";
+    	cout << "\tUsername >>> ";
     	cin >> Username;
-    	cout << "Email: ";
+    	cout << "\tEmail >>> ";
     	cin >> Email;
-    	changePassword();
+    	changePassword(false);
     }
 
 	string getFName()const
@@ -81,7 +100,7 @@ public:
         }
         return str;
     }
-	string resetPassword() //promena sifre, za slucaj da je zaboravljena
+	void resetPassword() //promena sifre, za slucaj da je zaboravljena
 	{
         int n=3; //kvadrirano daje duzinu sifre
         Password="";
@@ -97,9 +116,11 @@ public:
             Password[indexa]=Password[indexb];
             Password[indexb]=tmp;
         }
-        string tmpPassword=Password;
+        cout<<Password<<endl;
         Password=makeHash(Password);
-        return tmpPassword;
+        cout<<"Continue...";
+        char cont;
+        cin >> cont;
 	}
 	void setFName(string FName1)
 	{
@@ -121,12 +142,20 @@ public:
     {
         Password=P;
     }*/
-	void changePassword()
+	void changePassword(bool newP=true)
 	{
 		string P;
+        while(newP)
+        {
+            cout << "\tEnter current password >>> ";
+            cin >> P;
+            if(makeHash(P)==Password)
+                break;
+            cout << "\tIncorrect password! Try again.\n";
+        }
         while(1)
         {
-            cout << "Password(8-16 chars with atleast one big, small letter and number): ";
+            cout << "\tPassword(8-16 chars with atleast one big, small letter and number) >>> ";
             cin >> P;
             int n=P.size();
             bool v=false,m=false,b=false;

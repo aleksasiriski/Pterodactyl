@@ -4,18 +4,21 @@
 class Node
 {
 private:
+	string Name;
 	int ACPU,ARAM,AROM;
 	Server S;
 public:
 	Node():S()
 	{
+		Name="";
 		ACPU=2;
 		ARAM=16;
 		AROM=100;
 	}
-	Node(int AC,int ARA,int ARO,int C,int RA,int RO,string dbname,string dbip,string dbuser,string dbpassword)
-	:S(C,RA,RO,dbname,dbip,dbuser,dbpassword)
+	Node(string N,int AC,int ARA,int ARO,string SN,int C,int RA,int RO,string dbname,string dbip,string dbuser,string dbpassword)
+	:S(SN,C,RA,RO,dbname,dbip,dbuser,dbpassword)
 	{
+		Name=N;
 		ACPU=AC;
 		ARAM=ARA;
 		AROM=ARO;
@@ -78,11 +81,11 @@ public:
 	}
 	friend ostream& operator<<(ostream& output, const Node& n)
     {
-        output<<"Output of NODE:"<<endl;
-        output<<"ACPU: "<<n.ACPU<<endl;
-        output<<"ARAM: "<<n.ARAM<<endl;
-        output<<"AROM: "<<n.AROM<<endl;
-        output<<n.S<<endl;
+        output<<"Name: "<<n.Name<<" ";
+        output<<"ACPU: "<<n.ACPU<<" ";
+        output<<"ARAM: "<<n.ARAM<<" ";
+        output<<"AROM: "<<n.AROM<<" ";
+        output<<n.S;
         return output;
     }
 };
