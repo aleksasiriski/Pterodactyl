@@ -8,9 +8,6 @@
 #include <ctime>
 #include <vector>
 using namespace std;
-#include "location.hpp"
-#include "eggnestpack.hpp"
-#include "user.hpp"
 const char clear[]="clear"; //UNIX
 //const char clear[]="cls"; //Windows
 bool toexit(string choice)
@@ -24,11 +21,15 @@ bool toexit(string choice)
         )return true;
     else return false;
 }
+#include "location.hpp"
+#include "user.hpp"
+#include "eggnestpack.hpp"
 class Panel
 {
 private:
     vector<User*> users;
     vector<Admin*> admins;
+    vector<Location*> locations;
     string userfile,adminfile;
 public:
     Panel(string userfile="users.txt",string adminfile="admins.txt")
@@ -39,6 +40,42 @@ public:
         if(loadAdmins())
             Admin::setGlobalID((*(admins.rbegin()))->getadminID());
     }
+    ~Panel()
+    {
+        for(auto i=users.begin();i!=users.end();i++)
+            delete *i;
+        for(auto i=admins.begin();i!=admins.end();i++)
+            delete *i;
+        for(auto i=locations.begin();i!=locations.end();i++)
+            delete *i;
+    }
+    User* Login()
+    {while(1){
+        string username,password;
+        cout << "\tUsername >>> ";
+        cin >> username;
+        cout << "\tPassword >>> ";
+        cin >> password;
+        /*if(username=="admin" && password=="admin") //samo za testiranje
+            return NULL;*/
+        for(auto i=users.begin();i!=users.end();i++)
+        {
+            if(((*i)->getUsername())==username && ((*i)->getPassword())==makeHash(password))
+            {
+                cout << "\tSuccesfully logged in!\n";
+                return *i;
+            }
+        }
+        for(auto i=admins.begin();i!=admins.end();i++)
+        {
+            if(((*i)->getUsername())==username && ((*i)->getPassword())==makeHash(password))
+            {
+                cout << "\tSuccesfully logged in!\n";
+                return (User*)*i;
+            }
+        }
+        cout << "\tFailed to login! Try again.\n";
+    }}
     void loadUsers()
     {
         ifstream file(userfile);
@@ -62,6 +99,11 @@ public:
     }
     void listUsers()const
     {
+        if(users.empty())
+        {
+            cout << "Users do not exist.\n";
+            return;
+        }
         int counter=1;
         for(auto i=users.begin();i!=users.end();i++)
             cout<<"\t"<<counter++<<") "<<**i<<endl;
@@ -108,8 +150,14 @@ public:
     }
     void listAdmins()const
     {
+        if(admins.empty())
+        {
+            cout << "Admins do not exist.\n";
+            return;
+        }
+        int counter=1;
         for(auto i=admins.begin();i!=admins.end();i++)
-            cout<<"\t"<<**i<<endl;
+            cout<<"\t"<<counter++<<") "<<**i<<endl;
     }
     void saveAdmins()const
     {
@@ -162,18 +210,16 @@ public:
         else{Admin* a=new Admin;create(a);}
     }
     void ListUsers()const
-    {while(1){
+    {
         system(clear);
         cout << "------------------------- Users -------------------------\n\n";
         listUsers();
         cout << "------------------------- Admins ------------------------\n\n";
         listAdmins();
-        char done;
-        cout << "Done? (y) ";
-        cin >> done; 
-        if(done=='y')
-            break;
-    }}
+        cout<<"Continue...";
+        char cont;
+        cin >> cont;
+    }
     void SearchFName()
     {while(1){
         system(clear);
@@ -315,6 +361,7 @@ public:
                     if((*i)->getUsername()==Username){
                         if((*i)->getEmail()==Email){
                             deleted=true;
+                            delete *i;
                             users.erase(i);
                         }}}}
             if(deleted)
@@ -400,5 +447,102 @@ public:
             }
         }
     }}}
+    void AttachNode()
+    {
+        ListLocations();
+        if(locations.empty())
+            return;
+        cout << "\t >>> ";
+        int choice;
+        cin >> choice;
+        choice--;
+        Node* n=(*(locations.begin()+choice))->getNode();
+        listUsers();
+        cin >> choice;
+        choice--;
+        (*(users.begin()+choice))->pushNode(n);
+    }
+    void AddLocation()
+    {
+        string CC;
+        cout << "Country code(RS): ";
+        cin >> CC;
+        Location* l=new Location(CC);
+        locations.push_back(l);
+    }
+    void AddNode()
+    {
+        cout << "\t----- Select in which location to add node -----\n";
+        ListLocations();
+        if(locations.empty())
+            return;
+        cout << "\t >>> ";
+        int choice;
+        cin >> choice;
+        choice--;
+        (*(locations.begin()+choice))->AddNode();
+    }
+    void ShowLocations()
+    {
+        ListLocations();
+        cout<<"Continue...";
+        char cont;
+        cin >> cont;
+    }
+    void ListLocations()
+    {
+        if(locations.empty())
+        {
+            cout << "Locations do not exist.\n";
+            return;
+        }
+        int counter=1;
+        for(auto i=locations.begin();i!=locations.end();i++)
+            cout << counter++ << ") " << **i << endl;
+    }
+    void ShowNodes()
+    {
+        ListNodes();
+        cout<<"Continue...";
+        char cont;
+        cin >> cont;
+    }
+    void ListNodes()
+    {
+        cout << "\t----- Select in which location to list nodes -----\n";
+        ListLocations();
+        if(locations.empty())
+            return;
+        cout << "\t >>> ";
+        int choice;
+        cin >> choice;
+        choice--;
+        (*(locations.begin()+choice))->ListNodes();
+    }
+    void DeleteLocation()
+    {
+        cout << "\t----- Select location to delete -----\n";
+        ListLocations();
+        if(locations.empty())
+            return;
+        cout << "\t >>> ";
+        int choice;
+        cin >> choice;
+        choice--;
+        delete *(locations.begin()+choice);
+        locations.erase(locations.begin()+choice);
+    }
+    void DeleteNode()
+    {
+        cout << "\t----- Select in which location to delete node -----\n";
+        ListLocations();
+        if(locations.empty())
+            return;
+        cout << "\t >>> ";
+        int choice;
+        cin >> choice;
+        choice--;
+        (*(locations.begin()+choice))->DeleteNode();
+    }
 };
 #endif //PANEL_HPP_INCLUDED

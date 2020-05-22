@@ -36,11 +36,11 @@ public:
 	}
 	friend ostream& operator<<(ostream& output, const Database& db)
     {
-        output<<"Output of DB:"<<endl;
-        output<<"DB Name: "<<db.dbname<<endl;
-        output<<"DB IP: "<<db.dbip<<endl;
-        output<<"DB User: "<<db.dbuser<<endl;
-        output<<"DB Password: "<<db.dbpassword<<endl;
+        output<<"DB Info >> ";
+        output<<"DB Name: "<<db.dbname<<" ";
+        output<<"DB IP: "<<db.dbip<<" ";
+        output<<"DB User: "<<db.dbuser<<" ";
+        output<<"DB Password: "<<db.dbpassword;
         return output;
     }
 };
